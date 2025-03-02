@@ -34,8 +34,13 @@ public class PlayerShopsUserInputRename extends GenesisUserInput {
             }
             shop.setShopDisplayName(text);
             shop.updateIcon(p);
-            shop.getShopEdit().openInventory(p);
+
+            openInventorySync(p);
 
         }
+    }
+
+    private void openInventorySync(final Player p) {
+        Bukkit.getScheduler().runTask(shop.getPlugin(), () -> shop.getShopEdit().openInventory(p));
     }
 }
