@@ -1,6 +1,7 @@
 package studio.magemonkey.genesis.addon.playershops.objects;
 
 import lombok.RequiredArgsConstructor;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -34,8 +35,13 @@ public class PlayerShopsUserInputRename extends GenesisUserInput {
             }
             shop.setShopDisplayName(text);
             shop.updateIcon(p);
-            shop.getShopEdit().openInventory(p);
+
+            openInventorySync(p);
 
         }
+    }
+
+    private void openInventorySync(final Player p) {
+        Bukkit.getScheduler().runTask(shop.getPlugin(), () -> shop.getShopEdit().openInventory(p));
     }
 }
